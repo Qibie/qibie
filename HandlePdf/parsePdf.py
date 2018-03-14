@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+
 """
 @author:curry
 @software:PyCharm
 @file:parsePdf.py
 @time:2018/3/10
+@description: 处理pdf文件
 """
 
 import sys
@@ -19,8 +21,8 @@ from io import StringIO
 import os
 
 
-input_path=r'/home/curry/NER/20180309054447078/files'
-output_path=r'/home/curry/NER/txts_20180309054447078'
+input_path=r'/home/curry/NER/patent/pdf/files'
+output_path=r'/home/curry/NER/patent/txts/'
 
 
 

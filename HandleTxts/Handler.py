@@ -11,9 +11,9 @@ from HandleTxts.processtxts import ProcessTxt
 
 
 if __name__=="__main__":
-    input_path=r'/home/curry/NER/patent/txts/origin_txts'
-    output_path=r'/home/curry/NER/patent/txts/processed_txts'
-    word_segmentation_path=r'/home/curry/NER/patent/txts/Word_Segmentation'
+    input_path=r'/home/curry/NER/patent/txts/'
+    output_path=r'/home/curry/NER/patent/processed_txts'
+    word_segmentation_path=r'/home/curry/NER/patent/Word_Segmentation/'
     pt=ProcessTxt(input_path,output_path)
-    # pt.processtxts()
+    #pt.processtxts()
     pt.wordSegmentation(word_segmentation_path)
