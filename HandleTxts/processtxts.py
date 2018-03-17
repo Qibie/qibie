@@ -11,6 +11,7 @@ import re
 import os
 import jieba
 
+
 class ProcessTxt:
     def __init__(self, input_path, output_path):
         # 去掉中文数字和标点
@@ -63,42 +64,39 @@ class ProcessTxt:
                                 seg = ' '.join(seg_list)
                                 foutput.write(seg)
 
-    def mergeallwords(self, word_segmentation_path,daily_standard):
+    def mergeallwords(self, word_segmentation_path, daily_standard):
         """
         合并分词的结果
         :param word_segmentation_path:
         :return:
         """
-        with open(os.path.join(word_segmentation_path,"allwords.txt"),'w') as foutput:
+        with open(os.path.join(word_segmentation_path, "allwords.txt"), 'w') as foutput:
             """
             首先把人民日报和国家标准中的词读合并到allows.txt中
             """
-            if(daily_standard):
-                with open('/home/curry/NER/patent/dailywords.txt','r') as finput:
+            if (daily_standard):
+                with open('/home/curry/NER/patent/dailywords.txt', 'r') as finput:
                     for line in finput.readlines():
                         if not line:
                             break
-                        elif len(line.strip())!=0:
+                        elif len(line.strip()) != 0:
                             foutput.write(line)
                         else:
                             continue
 
-
-                with open('/home/curry/NER/patent/chunking.txt','r') as finput:
+                with open('/home/curry/NER/patent/chunking.txt', 'r') as finput:
                     for line in finput.readlines():
                         if not line:
                             break
-                        elif len(line.strip())!=0:
+                        elif len(line.strip()) != 0:
                             foutput.write(line)
                         else:
                             continue
-
-
 
             for file in os.listdir(word_segmentation_path):
                 index = file.rfind(".")
                 if (os.path.isfile(os.path.join(word_segmentation_path, file)) and file[index:] == '.txt'):
-                    with open(os.path.join(word_segmentation_path,file)) as finput:
+                    with open(os.path.join(word_segmentation_path, file)) as finput:
                         for line in finput.readlines():
                             if not line:
                                 break
@@ -106,3 +104,24 @@ class ProcessTxt:
                                 foutput.write(line)
                             else:
                                 continue
+
+    def characterSegmentation(self, character_segmentation_path):
+        """
+        中文分字
+        :param character_segmentation_path:
+        :return:
+        """
+        for file in os.listdir(self.OUTPUT_PATH):
+            index = file.rfind('.')
+            if (os.path.isfile(os.path.join(self.OUTPUT_PATH, file)) and file[index:] == '.txt'):
+                with open(os.path.join(self.OUTPUT_PATH, file), 'r') as finput:
+                    with open(os.path.join(character_segmentation_path, file), 'w') as foutput:
+                        for line in finput.readlines():
+                            if not line:
+                                break
+                            elif len(line.strip()) != 0:
+                                for str in line:
+                                    foutput.write(str+" ")
+                            else:
+                                continue
+
