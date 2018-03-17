@@ -19,4 +19,8 @@ if __name__=="__main__":
     #pt.processtxts()
     #pt.wordSegmentation(word_segmentation_path)
     #pt.mergeallwords(word_segmentation_path,True)
-    pt.characterSegmentation(character_segmentation_path)
+    # pt.characterSegmentation(character_segmentation_path)
+    # pt.mergecharacterwords(character_segmentation_path,True)
+    with open(r'/home/curry/NER/patent/character_segmentation/allwords.txt','r') as file:
+        for line in file.readlines():
+            print(line)

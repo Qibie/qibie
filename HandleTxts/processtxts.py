@@ -124,4 +124,53 @@ class ProcessTxt:
                                     foutput.write(str+" ")
                             else:
                                 continue
+    def mergecharacterwords(self,character_segmentation_path,daily_standard):
+        """
+        合并分字结果
+        :param character_segmentation_path:
+        :param daily_standard:
+        :return:
+        """
+        with open(os.path.join(character_segmentation_path,'allwords.txt'),'w') as foutput:
+            """
+                        首先把人民日报和国家标准中的词读合并到allows.txt中
+                        """
+            if (daily_standard):
+                with open('/home/curry/NER/patent/dailywords.txt', 'r') as finput:
+                    for line in finput.readlines():
+                        if not line:
+                            break
+                        elif len(line.strip()) != 0:
+                            for str in line.strip():
+                                if (str != " "):
+                                    foutput.write(str + ' ')
+                        else:
+                            continue
 
+                with open('/home/curry/NER/patent/chunking.txt', 'r') as finput:
+                    for line in finput.readlines():
+                        if not line:
+                            break
+                        elif len(line.strip()) != 0:
+                            for str in line.strip():
+                                if(str!=" "):
+                                    foutput.write(str+' ')
+                        else:
+                            continue
+            """
+            接着是分好字
+            """
+            for file in os.listdir(character_segmentation_path):
+                index=file.rfind('.')
+                if(os.path.isfile(os.path.join(character_segmentation_path,file)) and file[index:]=='.txt'):
+                    with open(os.path.join(character_segmentation_path,file),'r') as finput:
+                        for line in finput.readlines():
+                            if not line:
+                                break
+                            elif len(line.strip())!=0:
+                                for str in line.strip():
+                                    if (str != " "):
+                                        foutput.write(str + ' ')
+                            else:
+                                continue
+                foutput.write('\n')
