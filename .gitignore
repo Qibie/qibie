@@ -1,0 +1,10 @@
+#word2vecmodel
+/Word2Vec/model/
+/Word2Vec/model_py2_弃用
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build

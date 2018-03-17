@@ -16,4 +16,5 @@ if __name__=="__main__":
     word_segmentation_path=r'/home/curry/NER/patent/Word_Segmentation/'
     pt=ProcessTxt(input_path,output_path)
     #pt.processtxts()
-    pt.wordSegmentation(word_segmentation_path)
+    #pt.wordSegmentation(word_segmentation_path)
+    pt.mergeallwords(word_segmentation_path,True)
