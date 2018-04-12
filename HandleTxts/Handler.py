@@ -11,16 +11,15 @@ from HandleTxts.processtxts import ProcessTxt
 
 
 if __name__=="__main__":
-    input_path=r'/home/curry/NER/patent/txts/'
+    input_path=r'/home/curry/NER/patent/origin_txts/'
     output_path=r'/home/curry/NER/patent/processed_txts'
     word_segmentation_path=r'/home/curry/NER/patent/Word_Segmentation/'
     character_segmentation_path=r'/home/curry/NER/patent/character_segmentation/'
+    character_segmentation_path_column=r'/home/curry/NER/patent/character_segmentation_column'
     pt=ProcessTxt(input_path,output_path)
-    #pt.processtxts()
-    #pt.wordSegmentation(word_segmentation_path)
-    #pt.mergeallwords(word_segmentation_path,True)
+    # pt.processtxts()
+    pt.wordSegmentation(word_segmentation_path)
+    pt.mergeallwords(word_segmentation_path,True)
     # pt.characterSegmentation(character_segmentation_path)
     # pt.mergecharacterwords(character_segmentation_path,True)
-    with open(r'/home/curry/NER/patent/character_segmentation/allwords.txt','r') as file:
-        for line in file.readlines():
-            print(line)
+    # pt.splittoline(character_segmentation_path,character_segmentation_path_column)

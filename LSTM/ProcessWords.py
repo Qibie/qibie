@@ -6,7 +6,6 @@ import os
 from keras.preprocessing.sequence import pad_sequences
 
 # stop_word_file = 'dicts/stop_words.txt'
-jieba.set_dictionary('dicts/dict.txt.big')
 jieba.initialize()
 word_embedding_file = 'data/word_embedding_matrix.npy'
 
@@ -84,9 +83,9 @@ def add_word_data(word_data, word2index, max_length):
 
 
 if __name__ == '__main__':
-    char_train, tag_train = p.get_char_tag_data('data/train.txt')
-    char_dev, tag_dev = p.get_char_tag_data('data/dev.txt')
-    char_test, tag_test = p.get_char_tag_data('data/test.txt')
+    char_train, tag_train = p.get_char_tag_data('../data/train.txt')
+    char_dev, tag_dev = p.get_char_tag_data('../data/dev.txt')
+    char_test, tag_test = p.get_char_tag_data('../data/test.txt')
     # print(char_train[100][:20])
 
     word_train = get_word_data(char_train)
