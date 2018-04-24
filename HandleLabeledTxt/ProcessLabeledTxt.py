@@ -81,11 +81,28 @@ OUTPUT_DIR = '/home/curry/NER/patent/labeled_complete'
 #                 continue
 
 
+# import numpy as np
+# train=np.load("../data/train.npy")
+# i=0
+# for line in train:
+#     if(len(line)>300):
+#         print(len(line))
+#         print(line)
+#         i=i+1
+
+
 import numpy as np
-train=np.load("../data/train.npy")
+X_train=np.load("../data/train.npy")
+train_char=np.load('../data/tt.npy')
+tag=np.load("../data/tag.npy")
+y=np.load("../data/y.npy")
+
+
 i=0
-for line in train:
-    if(len(line)>300):
-        print(len(line))
-        print(line)
-        i=i+1
+while(i<len(train_char)):
+    # print(X_train[i])
+    print(train_char[i])
+    print(tag[i])
+    # print(y[i])
+    print("#########################")
+    i=i+1

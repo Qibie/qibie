@@ -12,8 +12,8 @@ char_embedding_mat = np.load('data/char_embedding_matrix.npy')
 X=np.load('data/train.npy')
 y=np.load('data/y.npy')
 
-X_train=X[:500]
-y_train=y[:500]
+X_train=X[:600]
+y_train=y[:600]
 
 
 
@@ -44,4 +44,4 @@ cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
 
 
 
-ner_model.train_attention(X_train, y_train,  cb)
+ner_model.train(X_train, y_train,  cb)

@@ -17,7 +17,7 @@ def get_X_orig(X_data, index2char):
     return X_orig
 
 def get_y_orig(y_pred, y_true):
-    label = ['O', 'B-PER', 'I-PER', 'B-LOC', 'I-LOC', 'B-ORG', 'I-ORG']
+    label = ['O', 'B', 'I']
     index2label = dict()
     idx = 0
     for c in label:
@@ -58,7 +58,9 @@ def get_entity(X_data, y_data):
             elif l == 'O':
                 entity_name = ''
         entity_list.append(d)
-
+    np.save("data/X_list.npy",X_data)
+    np.save("data/y_list.npy",y_data)
+    np.save("data/entity_list.npy",entity_list)
     return entity_list
 
 def micro_evaluation(pred_entity, true_entity):
@@ -107,10 +109,14 @@ def macro_evaluation(pred_entity, true_entity):
 if __name__ == '__main__':
 
     char_embedding_mat = np.load('data/char_embedding_matrix.npy')
+    X = np.load('data/train.npy')
+    y = np.load('data/y.npy')
 
-    X_test = np.load('data/X_test.npy')
+
+
+    X_test = X[:500]
     # print(X_test, X_test.shape)
-    y_test = np.load('data/y_test.npy')
+    y_test = y[:500]
 
     ## loss: 16.68228; 
     ## micro: precision:0.7741 recall:0.7641 F1:0.7691 LSTM
@@ -122,13 +128,13 @@ if __name__ == '__main__':
     #loss: 16.68265;
     # micro: precision:0.7798; recall:0.7625; F1:0.771  GRU
     # macro: 0.7914 0.7677 0.7791
-    ner_model = BiLSTM_CRF(n_input=200, n_vocab=char_embedding_mat.shape[0],
+    ner_model = BiLSTM_CRF(n_input=300, n_vocab=char_embedding_mat.shape[0],
                            n_embed=100, embedding_mat=char_embedding_mat,
                            keep_prob=0.5, n_lstm=256, keep_prob_lstm=0.6,
-                           n_entity=7, optimizer='adam', batch_size=16, epochs=500)
+                           n_entity=3, optimizer='adam', batch_size=16, epochs=500)
     """加载model"""
 
-    model_file = 'checkpoints/bilstm_crf_weights_best_wiki.hdf5'
+    model_file = 'checkpoints/bilstm_crf_weights_best.hdf5'
     ner_model.model.load_weights(model_file)
 
 

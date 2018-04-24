@@ -31,7 +31,7 @@ def get_char_tag_data(file_path):
             char_str += (tep_list[0] + ' ')
             tag_str += tep_list[1]
         else:
-            if tep_list[0] in '!。?;':
+            if tep_list[0] in '!。?；':
                 char_str += (tep_list[0] + ' ')
                 tag_str += tep_list[1]
             char_list.append(char_str)
@@ -124,12 +124,25 @@ if __name__ == '__main__':
 
 
     train,tag=get_char_tag_data('data/allwords.txt')
+    assert  len(train)==len(tag)
     i=0
-    while i<len(train):
+    while(i<len(train)):
         if(len(train[i])>300):
-            train.remove(train[i])
-            tag.remove(tag[i])
-        i=i+1
+            del(train[i])
+            del (tag[i])
+        else:
+            i=i+1
+    
+
+
+
+
+
+
+
+
+
+
 
     # char_train, tag_train = get_char_tag_data('data/train.txt')#获取输入数据
     # char_dev, tag_dev = get_char_tag_data('data/dev.txt')#获取dev数据
@@ -184,11 +197,12 @@ if __name__ == '__main__':
     # np.save('data/y_dev.npy', y_dev)
     # np.save('data/y_test.npy', y_test)
 
-    c=list(zip(train,y))
+    c=list(zip(X_train,y))
     random.shuffle(c)
-    train[:],y[:]=zip(*c)
+    X_train[:],y[:]=zip(*c)
 
-
+    np.save("data/tt.npy",train)
+    np.save("data/tag.npy",tag)
     np.save("data/train.npy",X_train)
     np.save("data/y.npy",y)
 

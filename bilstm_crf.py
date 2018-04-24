@@ -22,7 +22,7 @@ class BiLSTM_CRF():
         self.optimizer = optimizer
         self.batch_size = batch_size
         self.epochs = epochs
-        self.build_attention()
+        self.build()
 
 
 
@@ -101,10 +101,10 @@ class BiLSTM_CRF():
 
     def train(self, X_train, y_train, cb):
         self.model.fit(X_train, y_train, batch_size=self.batch_size,
-                       epochs=self.epochs,validation_split=0.2,
+                       epochs=self.epochs,validation_split=0.1,
                        callbacks=cb)
 
     def train_attention(self, X_train, y_train,  cb):
         self.model_attention.fit(X_train, y_train, batch_size=self.batch_size,
-                       epochs=self.epochs, validation_split=0.2,
+                       epochs=self.epochs, validation_split=0.1,
                        callbacks=cb)
