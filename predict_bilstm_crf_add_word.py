@@ -1,15 +1,11 @@
-# coding=utf-8
+# coding: utf-8
 import numpy as np
-from bilstm_crf import BiLSTM_CRF
+from bilstm_crf_add_word import BiLSTM_CRF
 from collections import defaultdict
 import preprocess as p
+from keras.optimizers import Adam, Nadam
 
 def get_X_orig(X_data, index2char):
-    """
-    :param X_data: index_array
-    :param index2char: dict
-    :return: 以character_level text列表为元素的列表
-    """
     X_orig = []
     for n in range(X_data.shape[0]):
         orig = [index2char[i] if i > 0 else 'None' for i in X_data[n]]
@@ -17,7 +13,7 @@ def get_X_orig(X_data, index2char):
     return X_orig
 
 def get_y_orig(y_pred, y_true):
-    label = ['O', 'B', 'I']
+    label = ['O', 'B-PER', 'I-PER', 'B-LOC', 'I-LOC', 'B-ORG', 'I-ORG']
     index2label = dict()
     idx = 0
     for c in label:
@@ -35,11 +31,6 @@ def get_y_orig(y_pred, y_true):
     return pred_list, true_list
 
 def get_entity(X_data, y_data):
-    """
-    :param X_data: 以character_level text列表为元素的列表
-    :param y_data: 以entity列表为元素的列表
-    :return: [{'entity': [phrase or word], ....}, ...]
-    """
     n_example = len(X_data)
     entity_list = []
     entity_name = ''
@@ -51,19 +42,18 @@ def get_entity(X_data, y_data):
                 d[l[2:]][-1] += c
                 entity_name += c
             elif (l[0] == 'I') & (len(entity_name) > 0):
-                try :
+                try:
                     d[l[2:]][-1] += c
                 except IndexError:
                     d[l[2:]].append(c)
             elif l == 'O':
                 entity_name = ''
         entity_list.append(d)
-    np.save("data/X_list.npy",X_data)
-    np.save("data/y_list.npy",y_data)
-    np.save("data/entity_list.npy",entity_list)
+
     return entity_list
 
 def micro_evaluation(pred_entity, true_entity):
+    # Weight all examples equally,favouring the performance on common classes. 
     n_example = len(pred_entity)
     t_pos, true, pred = [], [], []
     for n in range(n_example):
@@ -76,13 +66,14 @@ def micro_evaluation(pred_entity, true_entity):
         pred.extend([len(v) for v in et_p.values()])
         true.extend([len(v) for v in et_t.values()])
 
-    precision = sum(t_pos) / sum(pred) + 0.1
-    recall = sum(t_pos) / sum(true) + 0.1
+    precision = sum(t_pos) / sum(pred) + 1e-8
+    recall = sum(t_pos) / sum(true) + 1e-8
     f1 = 2 / (1 / precision + 1 / recall)
 
     return round(precision, 4), round(recall, 4), round(f1, 4)
 
 def macro_evaluation(pred_entity, true_entity):
+    # Weight all classes equally. 
     label = ['PER', 'ORG', 'LOC']
     n_example = len(pred_entity)
     precision, recall, f1 = [], [], []
@@ -109,31 +100,36 @@ def macro_evaluation(pred_entity, true_entity):
 if __name__ == '__main__':
 
     char_embedding_mat = np.load('data/char_embedding_matrix.npy')
-    X = np.load('data/train.npy')
-    y = np.load('data/y.npy')
+    word_embedding_mat = np.load('data/word_embedding_matrix.npy')
+    # word_embedding_mat = np.random.randn(157142, 200)
 
+    X_test = np.load('data/X_test.npy')
+    test_add = np.load('data/word_test_add.npy') # add word_embedding
+    # print(X_test, X_test.shape)
+    y_test = np.load('data/y_test.npy')
 
+    adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, clipvalue=0.01)
+    # nadam = Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
+    
+    ner_model = BiLSTM_CRF(n_input_char=200, char_embedding_mat=char_embedding_mat,
+                       n_input_word=200, word_embedding_mat=word_embedding_mat,
+                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=7,
+                       optimizer=adam, batch_size=32, epochs=10,
+                       n_filter=128, kernel_size=3)
+    model_file = 'checkpoints/bilstm_crf_add_word_weights_best_128.hdf5'
+    ner_model.model_char_cnn_word_rnn.load_weights(model_file)
 
-    X_test = X[:500]
-    y_test = y[:500]
-    ner_model = BiLSTM_CRF(n_input=300, n_vocab=char_embedding_mat.shape[0],
-                           n_embed=100, embedding_mat=char_embedding_mat,
-                           keep_prob=0.5, n_lstm=256, keep_prob_lstm=0.6,
-                           n_entity=3, optimizer='adam', batch_size=16, epochs=500)
-    """加载model"""
-
-    model_file = 'checkpoints/bilstm_crf_weights_best_not_attention.hdf5'
-    ner_model.model_attention.load_weights(model_file)
-
-
-    y_pred = ner_model.model_attention.predict(X_test[:, :])
+    y_pred = ner_model.model_char_cnn_word_rnn.predict([X_test[:, :], test_add[:, :]])
+    # print(pred.shape) # (4635, 574, 7)
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
     index2char = {i: w for w, i in char2index.items()}
+
     X_list = get_X_orig(X_test[:, :], index2char) # list
 
     pred_list, true_list = get_y_orig(y_pred, y_test[:, :]) # list
+    # print(X_list)
     pred_entity, true_entity = get_entity(X_list, pred_list), get_entity(X_list, true_list)
-    precision, recall, f1 = micro_evaluation(pred_entity, true_entity)
+    # print(pred_entity, true_entity)
+    precision, recall, f1 = macro_evaluation(pred_entity, true_entity)
     print(precision, recall, f1)
-    

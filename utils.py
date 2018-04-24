@@ -32,7 +32,7 @@ def get_word2object():
     :return:
     """
     word2vec = {}
-    f = open('/home/curry/NER/NER_Chinese-Text-master/HandleTxts/words_vec.txt') # load pre-trained word embedding
+    f = open('Word2Vec/model/word_vec_word') # load pre-trained word embedding
     i = 0
     for line in f:
         tep_list = line.split()
@@ -83,44 +83,35 @@ def add_word_data(word_data, word2index, max_length):
     return index_array
 
 
-if __name__ == '__main__':
-    char_train, tag_train = p.get_char_tag_data('data/train.txt')
-    char_dev, tag_dev = p.get_char_tag_data('data/dev.txt')
-    char_test, tag_test = p.get_char_tag_data('data/test.txt')
-    # print(char_train[100][:20])
-
-    word_train = get_word_data(char_train)
-    word_dev = get_word_data(char_dev)
-    word_test = get_word_data(char_test)
-    # print(word_train[100][:20])
-
-    word2vec, n_word, n_embed, word2index = get_word2object()
-    n_vocab = len(word2vec.keys()) + 1
-    print(n_word, n_vocab, n_embed) # 332648, 157142, 300
-
-    if os.path.exists(word_embedding_file):
-        word_embedding_matrix = np.load(word_embedding_file)
-    else:
-        word_embedding_matrix = get_word_embedding_matrix(word2vec, n_vocab,
-                                                          n_embed, word2index)
-
-    # length = [] # 分词且去掉停用词后，各文本中词语的频数统计
-    # for data in [word_train, word_dev]:
-    #     for l in data:
-    #         length.append(len(l))
-    # # print(max(length), length[800:1000]) # 348
-    # count = 0
-    # for k in length:
-    #     if k > 80:
-    #         count += 1
-    # print(count, len(length)) # 64 23509
-
-    word_index_train = add_word_data(word_train, word2index, 200)
-    word_index_dev = add_word_data(word_dev, word2index, 200)
-    word_index_test = add_word_data(word_test, word2index, 200)
-    print(word_index_train.shape, word_index_dev.shape, word_index_test.shape)
-    # (21147, 200) (2362, 200) (4706, 200)
-
-    np.save('data/word_train_add.npy', word_index_train)
-    np.save('data/word_dev_add.npy', word_index_dev)
-    np.save('data/word_test_add.npy', word_index_test)
+# if __name__ == '__main__':
+#
+#     char_train, tag_train = p.get_char_tag_data('data/allwords.txt')
+#
+#     word_train = get_word_data(char_train)
+#     # print(word_train[100][:20])
+#
+#     word2vec, n_word, n_embed, word2index = get_word2object()
+#     n_vocab = len(word2vec.keys()) + 1
+#     print(n_word, n_vocab, n_embed) # 332648, 157142, 300
+#
+#     if os.path.exists(word_embedding_file):
+#         word_embedding_matrix = np.load(word_embedding_file)
+#     else:
+#         word_embedding_matrix = get_word_embedding_matrix(word2vec, n_vocab,
+#                                                           n_embed, word2index)
+#
+#     # length = [] # 分词且去掉停用词后，各文本中词语的频数统计
+#     # for data in [word_train, word_dev]:
+#     #     for l in data:
+#     #         length.append(len(l))
+#     # # print(max(length), length[800:1000]) # 348
+#     # count = 0
+#     # for k in length:
+#     #     if k > 80:
+#     #         count += 1
+#     # print(count, len(length)) # 64 23509
+#
+#     word_index_train = add_word_data(word_train, word2index, 300)
+#     # (21147, 200) (2362, 200) (4706, 200)
+#
+#     np.save('data/word_train_add.npy', word_index_train)

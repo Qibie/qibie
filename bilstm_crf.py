@@ -23,26 +23,8 @@ class BiLSTM_CRF():
         self.optimizer = optimizer
         self.batch_size = batch_size
         self.epochs = epochs
-        self.build()
+        self.build_attention()
 
-
-
-    def attention_3d_block(self, inputs):
-        # if True, the attention vector is shared across the input_dimensions where the attention is applied.
-        SINGLE_ATTENTION_VECTOR = False
-        APPLY_ATTENTION_BEFORE_LSTM = False
-        # inputs.shape = (batch_size, time_steps, input_dim)
-        input_dim = int(inputs.shape[2])
-        time_steps = int(inputs.shape[1])
-        a = Permute((2, 1))(inputs)
-        # a = Reshape((input_dim, ))(a)  # this line is not useful. It's just to know which dimension is what.
-        a = Dense(time_steps, activation='softmax')(a)
-        if SINGLE_ATTENTION_VECTOR:
-            a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
-            a = RepeatVector(input_dim)(a)
-        a_probs = Permute((2, 1), name='attention_vec')(a)
-        output_attention_mul = merge([inputs, a_probs], name='attention_mul', mode='mul')
-        return output_attention_mul
 
     def build(self):
         self.model = Sequential()
