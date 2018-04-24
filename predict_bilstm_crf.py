@@ -122,7 +122,7 @@ if __name__ == '__main__':
                            n_entity=3, optimizer='adam', batch_size=16, epochs=500)
     """加载model"""
 
-    model_file = 'checkpoints/bilstm_crf_weights_best_not_attention.hdf5'
+    model_file = 'checkpoints/bilstm_crf_weights_best_attention.hdf5'
     ner_model.model_attention.load_weights(model_file)
 
 
