@@ -6,6 +6,7 @@ from crf_layer import CRF
 from keras.models import *
 from keras.layers.core import *
 from keras.layers import merge
+from keras.utils.vis_utils import plot_model
 
 class BiLSTM_CRF():
     def __init__(self, n_input, n_vocab, n_embed, embedding_mat, keep_prob,
@@ -69,6 +70,9 @@ class BiLSTM_CRF():
         self.model.compile(optimizer=self.optimizer,
                            loss=crf.loss_function,
                            metrics=[crf.accuracy])
+        print((self.model.summary()))
+        plot_model(self.model,to_file="model_png/character_model.png",show_shapes=False)
+
 
     def build_attention(self):
         char_input = Input(shape=(self.n_input,), name='main_input')
@@ -79,12 +83,12 @@ class BiLSTM_CRF():
                                  mask_zero=False,
                                  trainable=True)(char_input)
         char_drop=Dropout(self.keep_prob)(char_embed)
-        #attention
-        # attention_probs = Dense(int(char_drop.shape[2]), activation='softmax', name='attention_vec')(char_drop)
-        # attention_mul = merge([char_drop, attention_probs], output_shape=32, name='attention_mul', mode='mul')
+        # attention
+        attention_probs = Dense(int(char_drop.shape[2]), activation='softmax', name='attention_vec')(char_drop)
+        attention_mul = merge([char_drop, attention_probs], output_shape=32, name='attention_mul', mode='mul')
         blstm=Bidirectional(LSTM(self.n_lstm, return_sequences=True,
                                            dropout=self.keep_prob_lstm,
-                                           recurrent_dropout=self.keep_prob_lstm))(char_drop)
+                                           recurrent_dropout=self.keep_prob_lstm))(attention_mul)
 
         crf = CRF(units=self.n_entity, learn_mode='join',
                   test_mode='viterbi', sparse_target=False)
@@ -98,6 +102,8 @@ class BiLSTM_CRF():
                            loss=crf.loss_function,
                            metrics=[crf.accuracy])
         print(self.model_attention.summary())
+        print((self.model_attention.summary()))
+        plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
 
     def train(self, X_train, y_train, cb):
         self.model.fit(X_train, y_train, batch_size=self.batch_size,

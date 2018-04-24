@@ -135,10 +135,10 @@ if __name__ == '__main__':
     """加载model"""
 
     model_file = 'checkpoints/bilstm_crf_weights_best.hdf5'
-    ner_model.model.load_weights(model_file)
+    ner_model.model_attention.load_weights(model_file)
 
 
-    y_pred = ner_model.model.predict(X_test[:, :])
+    y_pred = ner_model.model_attention.predict(X_test[:, :])
     # print(pred.shape) # (4635, 574, 7)
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
