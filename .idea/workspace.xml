@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfeba5ff-90b2-475f-a7dc-9921aad1b4ee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/bilstm_crf_add_word.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict_bilstm_crf.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_bilstm_crf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict_bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_bilstm_crf_add_word.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_bilstm_crf_add_word.py" afterDir="false" />
     </list>
     <ignored path="qibie.iws" />
@@ -68,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="train_bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="train_bilstm_crf_add_word.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="32" column="83" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="83" />
+            <state relative-caret-position="289">
+              <caret line="37" column="67" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -95,11 +92,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_bilstm_crf_add_word.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="predict_bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="118" column="76" selection-start-line="118" selection-start-column="76" selection-end-line="118" selection-end-column="76" />
+            <state relative-caret-position="337">
+              <caret line="115" column="81" selection-start-line="115" selection-start-column="81" selection-end-line="115" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict_bilstm_crf.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/predict_bilstm_crf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="507">
+              <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -171,10 +177,10 @@
         <option value="$PROJECT_DIR$/bilstm_crf.py" />
         <option value="$PROJECT_DIR$/train_bilstm_crf.py" />
         <option value="$PROJECT_DIR$/preprocess.py" />
-        <option value="$PROJECT_DIR$/predict_bilstm_crf.py" />
         <option value="$PROJECT_DIR$/bilstm_crf_add_word.py" />
-        <option value="$PROJECT_DIR$/train_bilstm_crf_add_word.py" />
+        <option value="$PROJECT_DIR$/predict_bilstm_crf.py" />
         <option value="$PROJECT_DIR$/predict_bilstm_crf_add_word.py" />
+        <option value="$PROJECT_DIR$/train_bilstm_crf_add_word.py" />
       </list>
     </option>
   </component>
@@ -220,6 +226,17 @@
               <item name="qibie" type="b2602c69:ProjectViewProjectNode" />
               <item name="qibie" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qibie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qibie" type="462c0819:PsiDirectoryNode" />
+              <item name="Word2Vec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qibie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qibie" type="462c0819:PsiDirectoryNode" />
+              <item name="Word2Vec" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -603,11 +620,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5002755" side_tool="true" weight="0.31903765" />
       <window_info anchor="right" x="0" y="0" width="414" height="892" id="Documentation" order="5" sideWeight="0.5023256" side_tool="true" weight="0.3294766" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997245" weight="0.39644352" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997245" visible="true" weight="0.39644352" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3294979" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32845187" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32740587" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17906336" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32740587" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17906336" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" sideWeight="0.49923196" weight="0.3294766" />
       <window_info anchor="right" id="SciView" order="4" sideWeight="0.4976744" weight="0.3294766" />
@@ -1058,13 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/activelearning/findtopsentences.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-381">
@@ -1102,6 +1112,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="100" column="50" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="115" column="81" selection-start-line="115" selection-start-column="81" selection-end-line="115" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bilstm_crf_add_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1092">
@@ -1111,15 +1135,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train_bilstm_crf_add_word.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="32" column="83" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="118" column="76" selection-start-line="118" selection-start-column="76" selection-end-line="118" selection-end-column="76" />
+        <state relative-caret-position="289">
+          <caret line="37" column="67" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
         </state>
       </provider>
     </entry>

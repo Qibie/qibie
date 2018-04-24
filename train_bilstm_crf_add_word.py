@@ -35,7 +35,7 @@ log_filepath = os.getcwd() + '/logs/concat_drop'
 
 cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
                       verbose=1, save_best_only=True, save_weights_only=True, mode='min'),
-      EarlyStopping(monitor='val_loss', min_delta=1e-8, patience=0, mode='min'),
+      EarlyStopping(monitor='val_loss', min_delta=1e-8, patience=10, mode='min'),
       TensorBoard(log_dir=log_filepath, write_graph=True, write_images=True,
                   histogram_freq=0),
       ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, mode='min',

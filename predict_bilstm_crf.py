@@ -97,8 +97,8 @@ def macro_evaluation(pred_entity, true_entity):
                           if l in (et_p.keys() & et_t.keys()) else 0])
             true.extend([len(et_t[l]) if l in et_t.keys() else 0])
             pred.extend([len(et_p[l]) if l in et_p.keys() else 0])
-        precision.append(sum(t_pos) / sum(pred) + 1e-8)
-        recall.append(sum(t_pos) / sum(true) + 1e-8)
+        precision.append(sum(t_pos) / sum(pred) + 0.1)
+        recall.append(sum(t_pos) / sum(true) + 0.1)
         f1.append(2 / (1 / precision[-1] + 1 / recall[-1]))
     avg_precision = np.mean(precision)
     avg_recall = np.mean(recall)
@@ -132,6 +132,6 @@ if __name__ == '__main__':
 
     pred_list, true_list = get_y_orig(y_pred, y_test[:, :]) # list
     pred_entity, true_entity = get_entity(X_list, pred_list), get_entity(X_list, true_list)
-    precision, recall, f1 = micro_evaluation(pred_entity, true_entity)
+    precision, recall, f1 = macro_evaluation(pred_entity, true_entity)
     print(precision, recall, f1)
     

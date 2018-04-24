@@ -13,7 +13,7 @@ def get_X_orig(X_data, index2char):
     return X_orig
 
 def get_y_orig(y_pred, y_true):
-    label = ['O', 'B-PER', 'I-PER', 'B-LOC', 'I-LOC', 'B-ORG', 'I-ORG']
+    label = ['O', 'B', 'I']
     index2label = dict()
     idx = 0
     for c in label:
@@ -66,8 +66,8 @@ def micro_evaluation(pred_entity, true_entity):
         pred.extend([len(v) for v in et_p.values()])
         true.extend([len(v) for v in et_t.values()])
 
-    precision = sum(t_pos) / sum(pred) + 1e-8
-    recall = sum(t_pos) / sum(true) + 1e-8
+    precision = sum(t_pos) / sum(pred) + 0.1
+    recall = sum(t_pos) / sum(true) + 0.1
     f1 = 2 / (1 / precision + 1 / recall)
 
     return round(precision, 4), round(recall, 4), round(f1, 4)
@@ -88,8 +88,8 @@ def macro_evaluation(pred_entity, true_entity):
                           if l in (et_p.keys() & et_t.keys()) else 0])
             true.extend([len(et_t[l]) if l in et_t.keys() else 0])
             pred.extend([len(et_p[l]) if l in et_p.keys() else 0])
-        precision.append(sum(t_pos) / sum(pred) + 1e-8)
-        recall.append(sum(t_pos) / sum(true) + 1e-8)
+        precision.append(sum(t_pos) / sum(pred) + 0.1)
+        recall.append(sum(t_pos) / sum(true) + 0.1)
         f1.append(2 / (1 / precision[-1] + 1 / recall[-1]))
     avg_precision = np.mean(precision)
     avg_recall = np.mean(recall)
@@ -111,9 +111,9 @@ if __name__ == '__main__':
     adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, clipvalue=0.01)
     # nadam = Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
     
-    ner_model = BiLSTM_CRF(n_input_char=200, char_embedding_mat=char_embedding_mat,
-                       n_input_word=200, word_embedding_mat=word_embedding_mat,
-                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=7,
+    ner_model = BiLSTM_CRF(n_input_char=300, char_embedding_mat=char_embedding_mat,
+                       n_input_word=300, word_embedding_mat=word_embedding_mat,
+                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=3,
                        optimizer=adam, batch_size=32, epochs=10,
                        n_filter=128, kernel_size=3)
     model_file = 'checkpoints/bilstm_crf_add_word_weights_best_not_attention.hdf5'
@@ -131,5 +131,5 @@ if __name__ == '__main__':
     # print(X_list)
     pred_entity, true_entity = get_entity(X_list, pred_list), get_entity(X_list, true_list)
     # print(pred_entity, true_entity)
-    precision, recall, f1 = macro_evaluation(pred_entity, true_entity)
+    precision, recall, f1 = micro_evaluation(pred_entity, true_entity)
     print(precision, recall, f1)
