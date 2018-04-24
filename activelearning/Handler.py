@@ -13,7 +13,7 @@ import os
 
 FILE_SOURCE_DIRNAME = '/home/curry/NER/patent/character_segmentation_column'
 FILE_TARGET_DIRNAME = '/home/curry/NER/patent/character_segmentation_column_simple'
-LABEL_LEGTH = 10
+LABEL_LEGTH = 20
 
 ft = Findtopsentences()
 

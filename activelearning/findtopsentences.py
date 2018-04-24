@@ -43,10 +43,10 @@ class Findtopsentences:
         char_list = []  # 列表中每个元素为每句话组成的字符串
         while i < (len(list_all) - 1):
             str_all = list_all[i]
-            if (str_all[0] not in '!。?;'):
+            if (str_all[0] not in '!。?;；！'):
                 char_str += (str_all[0] + ' ')
             else:
-                if str_all[0] in '!。?;':
+                if str_all[0] in '!。?;；！':
                     char_str += (str_all[0] + ' ')
                     char_list.append(char_str)
                     char_str = str()
@@ -97,7 +97,7 @@ class Findtopsentences:
 
     def gettopsentences(self, length):
         char_data = self.get_char_data()  # 文章句子
-        index_array = self.get_index_data(char_data, 300)  # 索引构成的句子
+        index_array = self.get_index_data(char_data, 500)  # 索引构成的句子
         sentences_embedding = self.get_sentences_embedding(index_array)  # 文章句子向量
         sentence_rank = np.zeros(len(char_data))  # 记录每个句子的相似度
         i = 0

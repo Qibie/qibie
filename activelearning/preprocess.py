@@ -51,7 +51,7 @@ def get_char2object():
     :return:
     """
     char2vec = {}
-    f = open('/home/curry/NER/qibie/Word2Vec/character_model/word_vec') # load pre-trained word embedding
+    f = open('wiki_100.utf8.txt') # load pre-trained word embedding
     i = 0
     for line in f:
         tep_list = line.split()
@@ -119,59 +119,59 @@ def get_y_data(tag_data, label2index, max_length):
     # return np.expand_dims(index_array, -1)
     return index_array
 
-# if __name__ == '__main__':
-#
-#     char_train, tag_train = get_char_tag_data('data/train.txt')#获取输入数据
-#     char_dev, tag_dev = get_char_tag_data('data/dev.txt')#获取dev数据
-#     char_test, tag_test = get_char_tag_data('data/test.txt')#获取test数据
-#     # print(char_train[:3], tag_train[:3])
-#     char2vec, n_char, n_embed, char2index = get_char2object()#加载字向量
-#     n_vocab = n_char + 1
-#     # print(word2vec['的'], word2index['的']) # n_embed = 100
-#     if os.path.exists(embedding_file):
-#         embedding_mat = np.load(embedding_file)
-#     else:
-#         embedding_mat = get_embedding_matrix(char2vec, n_vocab, n_embed, char2index)
-#
-#     # length = []
-#     # for data in [char_train, char_dev]:
-#     #     for l in data:
-#     #         length.append(len(l))
-#     # print(max(length), length[800:1000]) # 574
-#     # count = 0
-#     # for k in length:
-#     #     if k > 200:
-#     #         count += 1
-#     # print(count, len(length)) # 69 23509
-#
-#     X_train = get_X_data(char_train, char2index, 200)
-#     X_dev = get_X_data(char_dev, char2index, 200)
-#     X_test = get_X_data(char_test, char2index, 200)
-#     print(X_train.shape, X_dev.shape, X_test.shape) # (21147, 200) (2362, 200) (4706, 200)
-#
-#     # tag_set = set()
-#     # for data in [tag_train, tag_dev, tag_test]:
-#     #     for l in data:
-#     #         tag_set.update(l)
-#     # print(tag_set) # {'B-LOC', 'B-PER', 'I-LOC', 'I-ORG', 'I-PER', 'O', 'B-ORG'}
-#     label2index = dict()
-#     idx = 0
-#     for c in ['O', 'B-PER', 'I-PER', 'B-LOC', 'I-LOC', 'B-ORG', 'I-ORG']:
-#         label2index[c] = idx
-#         idx += 1
-#     # print(label2index)
-#
-#     y_train = get_y_data(tag_train, label2index, 200)
-#     y_dev = get_y_data(tag_dev, label2index, 200)
-#     y_test = get_y_data(tag_test, label2index, 200)
-#     # print(y_train[:2])
-#
-#     np.save('data/X_train.npy', X_train)
-#     np.save('data/X_dev.npy', X_dev)
-#     np.save('data/X_test.npy', X_test)
-#     np.save('data/y_train.npy', y_train)
-#     np.save('data/y_dev.npy', y_dev)
-#     np.save('data/y_test.npy', y_test)
+if __name__ == '__main__':
+
+    char_train, tag_train = get_char_tag_data('data/train.txt')#获取输入数据
+    char_dev, tag_dev = get_char_tag_data('data/dev.txt')#获取dev数据
+    char_test, tag_test = get_char_tag_data('data/test.txt')#获取test数据
+    # print(char_train[:3], tag_train[:3])
+    char2vec, n_char, n_embed, char2index = get_char2object()#加载字向量
+    n_vocab = n_char + 1
+    # print(word2vec['的'], word2index['的']) # n_embed = 100
+    if os.path.exists(embedding_file):
+        embedding_mat = np.load(embedding_file)
+    else:
+        embedding_mat = get_embedding_matrix(char2vec, n_vocab, n_embed, char2index)
+
+    # length = []
+    # for data in [char_train, char_dev]:
+    #     for l in data:
+    #         length.append(len(l))
+    # print(max(length), length[800:1000]) # 574
+    # count = 0
+    # for k in length:
+    #     if k > 200:
+    #         count += 1
+    # print(count, len(length)) # 69 23509
+
+    X_train = get_X_data(char_train, char2index, 200)
+    X_dev = get_X_data(char_dev, char2index, 200)
+    X_test = get_X_data(char_test, char2index, 200)
+    print(X_train.shape, X_dev.shape, X_test.shape) # (21147, 200) (2362, 200) (4706, 200)
+
+    # tag_set = set()
+    # for data in [tag_train, tag_dev, tag_test]:
+    #     for l in data:
+    #         tag_set.update(l)
+    # print(tag_set) # {'B-LOC', 'B-PER', 'I-LOC', 'I-ORG', 'I-PER', 'O', 'B-ORG'}
+    label2index = dict()
+    idx = 0
+    for c in ['O', 'B-PER', 'I-PER', 'B-LOC', 'I-LOC', 'B-ORG', 'I-ORG']:
+        label2index[c] = idx
+        idx += 1
+    # print(label2index)
+
+    y_train = get_y_data(tag_train, label2index, 200)
+    y_dev = get_y_data(tag_dev, label2index, 200)
+    y_test = get_y_data(tag_test, label2index, 200)
+    # print(y_train[:2])
+
+    np.save('data/X_train.npy', X_train)
+    np.save('data/X_dev.npy', X_dev)
+    np.save('data/X_test.npy', X_test)
+    np.save('data/y_train.npy', y_train)
+    np.save('data/y_dev.npy', y_dev)
+    np.save('data/y_test.npy', y_test)
 
 
 # import re
