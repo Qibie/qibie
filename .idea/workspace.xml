@@ -611,8 +611,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.predict_bilstm_crf" />
         <item itemvalue="Python.train_bilstm_crf" />
+        <item itemvalue="Python.predict_bilstm_crf" />
         <item itemvalue="Python.preprocess" />
         <item itemvalue="Python.ProcessLabeledTxt" />
         <item itemvalue="Python.Handler (1)" />
