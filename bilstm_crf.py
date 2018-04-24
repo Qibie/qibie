@@ -23,7 +23,7 @@ class BiLSTM_CRF():
         self.optimizer = optimizer
         self.batch_size = batch_size
         self.epochs = epochs
-        self.build_attention()
+        self.build()
 
 
 
@@ -71,7 +71,7 @@ class BiLSTM_CRF():
                            loss=crf.loss_function,
                            metrics=[crf.accuracy])
         print((self.model.summary()))
-        plot_model(self.model,to_file="model_png/character_model.png",show_shapes=False)
+        # plot_model(self.model,to_file="model_png/character_model.png",show_shapes=False)
 
 
     def build_attention(self):

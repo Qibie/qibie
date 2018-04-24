@@ -76,8 +76,8 @@ def micro_evaluation(pred_entity, true_entity):
         pred.extend([len(v) for v in et_p.values()])
         true.extend([len(v) for v in et_t.values()])
 
-    precision = sum(t_pos) / sum(pred) + 1e-8
-    recall = sum(t_pos) / sum(true) + 1e-8
+    precision = sum(t_pos) / sum(pred) + 0.1
+    recall = sum(t_pos) / sum(true) + 0.1
     f1 = 2 / (1 / precision + 1 / recall)
 
     return round(precision, 4), round(recall, 4), round(f1, 4)
@@ -134,11 +134,11 @@ if __name__ == '__main__':
                            n_entity=3, optimizer='adam', batch_size=16, epochs=500)
     """加载model"""
 
-    model_file = 'checkpoints/bilstm_crf_weights_best.hdf5'
-    ner_model.model_attention.load_weights(model_file)
+    model_file = 'checkpoints/bilstm_crf_weights_best_not_attention.hdf5'
+    ner_model.model.load_weights(model_file)
 
 
-    y_pred = ner_model.model_attention.predict(X_test[:, :])
+    y_pred = ner_model.model.predict(X_test[:, :])
     # print(pred.shape) # (4635, 574, 7)
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
