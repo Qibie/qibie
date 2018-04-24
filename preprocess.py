@@ -176,6 +176,13 @@ if __name__ == '__main__':
     # 打乱索引
     index = [i for i in range(len(train))]
     random.shuffle(index)
+
+    train=np.array(train)
+    tag=np.array(tag)
+    X_train=np.array(X_train)
+    y=np.array(y)
+    word_train=np.array(word_train)
+    word_index_train=np.array(word_index_train)
     train = train[index]
     tag = tag[index]
     X_train = X_train[index]

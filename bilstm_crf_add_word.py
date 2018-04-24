@@ -42,7 +42,7 @@ class BiLSTM_CRF():
 
         # self.build_simple()
         # self.build()
-        self.build_char_cnn_word_rnn()
+        self.build2()
         # self.build3()
         # self.build4()
         # self.build_attention()

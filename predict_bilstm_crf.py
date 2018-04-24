@@ -112,8 +112,6 @@ if __name__ == '__main__':
     X = np.load('data/train.npy')
     y = np.load('data/y.npy')
 
-
-
     X_test = X[:500]
     y_test = y[:500]
     ner_model = BiLSTM_CRF(n_input=300, n_vocab=char_embedding_mat.shape[0],

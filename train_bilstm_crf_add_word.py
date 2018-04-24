@@ -11,20 +11,12 @@ import os
 char_embedding_mat = np.load('data/char_embedding_matrix.npy')
 word_embedding_mat = np.load('data/word_embedding_matrix.npy')
 # word_embedding_mat = np.random.randn(157142, 200)
-
-X_train = np.load('data/X_train.npy')
-train_add = np.load('data/word_train_add.npy')  # add word_embedding
-X_dev = np.load('data/X_dev.npy')
-dev_add = np.load('data/word_dev_add.npy')
-y_train = np.load('data/y_train.npy')
-y_dev = np.load('data/y_dev.npy')
-
-X_test = np.load('data/X_test.npy')
-test_add = np.load('data/word_test_add.npy')  # add word_embedding
-# print(X_test, X_test.shape)
-y_test = np.load('data/y_test.npy')
-
-
+X = np.load('data/train.npy')
+y = np.load('data/y.npy')
+X_word = np.load('data/word.npy')
+X_train = X[:600]
+y_train = y[:600]
+X_word_train=X_word[:600]
 
 adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, clipvalue=0.01)
 # nadam = Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
@@ -33,12 +25,12 @@ adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, clipvalue=0.01)
 #                        n_input_word=200, word_embedding_mat=word_embedding_mat,
 #                        keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=7,
 #                        optimizer=adam, batch_size=32, epochs=500)
-ner_model = BiLSTM_CRF(n_input_char=200, char_embedding_mat=char_embedding_mat,
-                       n_input_word=200, word_embedding_mat=word_embedding_mat,
-                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=7,
+ner_model = BiLSTM_CRF(n_input_char=300, char_embedding_mat=char_embedding_mat,
+                       n_input_word=300, word_embedding_mat=word_embedding_mat,
+                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=3,
                        optimizer=adam, batch_size=32, epochs=10,
                        n_filter=128, kernel_size=3)
-cp_folder, cp_file = 'checkpoints', 'bilstm_crf_add_word_weights_best_128.hdf5'
+cp_folder, cp_file = 'checkpoints', 'bilstm_crf_add_word_weights_best_not_attention.hdf5'
 log_filepath = os.getcwd() + '/logs/concat_drop'
 
 cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
@@ -48,6 +40,6 @@ cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
                   histogram_freq=0),
       ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, mode='min',
                         epsilon=1e-4, cooldown=2, min_lr=1e-8)]
-# ner_model.train2([X_train, train_add], y_train, [X_dev, dev_add], y_dev, cb)
-ner_model.train_char_cnn_word_rnn([X_train,train_add],y_train,cb)
+ner_model.train2([X_train, X_word_train], y_train, cb)
+# ner_model.train_char_cnn_word_rnn([X_train, train_add], y_train, cb)
 # print(ner_model.model2.evaluate([X_test,test_add],y_test))
