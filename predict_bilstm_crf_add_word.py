@@ -118,7 +118,7 @@ if __name__ == '__main__':
                        keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=3,
                        optimizer=adam, batch_size=32, epochs=10,
                        n_filter=128, kernel_size=3)
-    model_file = 'checkpoints/bilstm_crf_add_word_weights_best_not_attention.hdf5'
+    model_file = 'checkpoints/bilstm_crf_add_word_weights_best_attention.hdf5'
     ner_model.model2.load_weights(model_file)
 
     y_pred = ner_model.model2.predict([X_test[:, :], test_add[:, :]])

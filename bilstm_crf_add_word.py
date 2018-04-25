@@ -159,10 +159,10 @@ class BiLSTM_CRF():
                                trainable=True)(char_input)
         char_embed_drop = Dropout(self.keep_prob)(char_embed)
 
-        # # #attention
-        # attention_probs = Dense(int(char_embed_drop.shape[2]), activation='softmax', name='attention_vec')(
-        #     char_embed_drop)
-        # attention_mul = merge([char_embed_drop, attention_probs], name='attention_mul', mode='mul')
+        # #attention
+        attention_probs = Dense(int(char_embed_drop.shape[2]), activation='softmax', name='attention_vec')(
+            char_embed_drop)
+        attention_mul = merge([char_embed_drop, attention_probs], name='attention_mul', mode='mul')
 
         # auxiliary
         word_input = Input(shape=(self.n_input_word,))
@@ -181,7 +181,7 @@ class BiLSTM_CRF():
         word_conv = LeakyReLU(alpha=1 / 5.5)(word_conv)
 
         # concatenation
-        concat = Concatenate(axis=-1)([char_embed_drop, word_conv])
+        concat = Concatenate(axis=-1)([attention_mul, word_conv])
         concat_drop = TimeDistributed(Dropout(self.keep_prob))(concat)
         #
 

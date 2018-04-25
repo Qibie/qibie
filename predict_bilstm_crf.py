@@ -4,6 +4,7 @@ from bilstm_crf import BiLSTM_CRF
 from collections import defaultdict
 import preprocess as p
 
+
 def get_X_orig(X_data, index2char):
     """
     :param X_data: index_array
@@ -15,6 +16,7 @@ def get_X_orig(X_data, index2char):
         orig = [index2char[i] if i > 0 else 'None' for i in X_data[n]]
         X_orig.append(orig)
     return X_orig
+
 
 def get_y_orig(y_pred, y_true):
     label = ['O', 'B', 'I']
@@ -34,6 +36,7 @@ def get_y_orig(y_pred, y_true):
         # print(pred_label, true_label)
     return pred_list, true_list
 
+
 def get_entity(X_data, y_data):
     """
     :param X_data: 以character_level text列表为元素的列表
@@ -51,17 +54,18 @@ def get_entity(X_data, y_data):
                 d[l[2:]][-1] += c
                 entity_name += c
             elif (l[0] == 'I') & (len(entity_name) > 0):
-                try :
+                try:
                     d[l[2:]][-1] += c
                 except IndexError:
                     d[l[2:]].append(c)
             elif l == 'O':
                 entity_name = ''
         entity_list.append(d)
-    np.save("data/X_list.npy",X_data)
-    np.save("data/y_list.npy",y_data)
-    np.save("data/entity_list.npy",entity_list)
+    np.save("data/X_list.npy", X_data)
+    np.save("data/y_list.npy", y_data)
+    np.save("data/entity_list.npy", entity_list)
     return entity_list
+
 
 def micro_evaluation(pred_entity, true_entity):
     n_example = len(pred_entity)
@@ -82,6 +86,7 @@ def micro_evaluation(pred_entity, true_entity):
 
     return round(precision, 4), round(recall, 4), round(f1, 4)
 
+
 def macro_evaluation(pred_entity, true_entity):
     label = ['PER', 'ORG', 'LOC']
     n_example = len(pred_entity)
@@ -94,10 +99,10 @@ def macro_evaluation(pred_entity, true_entity):
             print('the prediction is', et_p.items(), '\n',
                   'the true is', et_t.items())
             t_pos.extend([len(set(et_p[l]) & set(et_t[l]))
-                          if l in (et_p.keys() & et_t.keys()) else 0])
-            true.extend([len(et_t[l]) if l in et_t.keys() else 0])
-            pred.extend([len(et_p[l]) if l in et_p.keys() else 0])
-        if(sum(t_pos)>0 and sum(pred)>0):
+                          for l in (et_p.keys() & et_t.keys()) ])
+            true.extend([len(et_t[l]) for l in et_t.keys() ])
+            pred.extend([len(et_p[l]) for l in et_p.keys() ])
+        if (sum(t_pos) > 0 and sum(pred) > 0):
             precision.append(sum(t_pos) / sum(pred) + 0.1)
             recall.append(sum(t_pos) / sum(true) + 0.1)
             f1.append(2 / (1 / precision[-1] + 1 / recall[-1]))
@@ -108,13 +113,12 @@ def macro_evaluation(pred_entity, true_entity):
 
 
 if __name__ == '__main__':
-
     char_embedding_mat = np.load('data/char_embedding_matrix.npy')
     X = np.load('data/train.npy')
     y = np.load('data/y.npy')
 
-    X_test = X[:500]
-    y_test = y[:500]
+    X_test = X[600:]
+    y_test = y[600:]
     ner_model = BiLSTM_CRF(n_input=300, n_vocab=char_embedding_mat.shape[0],
                            n_embed=100, embedding_mat=char_embedding_mat,
                            keep_prob=0.5, n_lstm=256, keep_prob_lstm=0.6,
@@ -124,15 +128,13 @@ if __name__ == '__main__':
     model_file = 'checkpoints/bilstm_crf_weights_best_attention.hdf5'
     ner_model.model_attention.load_weights(model_file)
 
-
     y_pred = ner_model.model_attention.predict(X_test[:, :])
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
     index2char = {i: w for w, i in char2index.items()}
-    X_list = get_X_orig(X_test[:, :], index2char) # list
+    X_list = get_X_orig(X_test[:, :], index2char)  # list
 
-    pred_list, true_list = get_y_orig(y_pred, y_test[:, :]) # list
+    pred_list, true_list = get_y_orig(y_pred, y_test[:, :])  # list
     pred_entity, true_entity = get_entity(X_list, pred_list), get_entity(X_list, true_list)
-    precision, recall, f1 = macro_evaluation(pred_entity, true_entity)
+    precision, recall, f1 = micro_evaluation(pred_entity, true_entity)
     print(precision, recall, f1)
-    
