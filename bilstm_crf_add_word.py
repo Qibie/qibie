@@ -307,7 +307,7 @@ class BiLSTM_CRF():
                         epochs=self.epochs, validation_split=0.1,
                         callbacks=cb)
 
-    def build_attention(self, X_train, y_train, cb):
+    def train_attention(self, X_train, y_train, cb):
         self.model_attention.fit(X_train, y_train, batch_size=self.batch_size,
                                  epochs=self.epochs, validation_split=0.1,
                                  callbacks=cb)

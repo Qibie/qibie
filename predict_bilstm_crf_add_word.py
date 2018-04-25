@@ -115,13 +115,13 @@ if __name__ == '__main__':
     
     ner_model = BiLSTM_CRF(n_input_char=300, char_embedding_mat=char_embedding_mat,
                        n_input_word=300, word_embedding_mat=word_embedding_mat,
-                       keep_prob=0.7, n_lstm=128, keep_prob_lstm=0.6, n_entity=3,
+                       keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=3,
                        optimizer=adam, batch_size=32, epochs=10,
                        n_filter=128, kernel_size=3)
-    model_file = 'checkpoints/bilstm_crf_add_word_weights_best_attention_128.hdf5'
-    ner_model.model2.load_weights(model_file)
+    model_file = 'checkpoints/bilstm_crf_add_word_weights_best_attention.hdf5'
+    ner_model.model_attention.load_weights(model_file)
 
-    y_pred = ner_model.model2.predict([X_test[:, :], test_add[:, :]])
+    y_pred = ner_model.model_attention.predict([X_test[:, :], test_add[:, :]])
     # print(pred.shape) # (4635, 574, 7)
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
