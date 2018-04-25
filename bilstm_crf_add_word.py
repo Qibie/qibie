@@ -156,7 +156,7 @@ class BiLSTM_CRF():
                                input_length=self.n_input_char,
                                weights=[self.char_embedding_mat],
                                mask_zero=False,
-                               trainable=False)(char_input)
+                               trainable=True)(char_input)
         char_embed_drop = Dropout(self.keep_prob)(char_embed)
 
         # # #attention
@@ -171,7 +171,7 @@ class BiLSTM_CRF():
                                input_length=self.n_input_word,
                                weights=[self.word_embedding_mat],
                                mask_zero=False,
-                               trainable=False)(word_input)
+                               trainable=True)(word_input)
         word_embed_drop = Dropout(self.keep_prob)(word_embed)
         # 使用CNN提取word的n_gram特征
         word_conv = Conv1D(self.n_filter, kernel_size=self.kernel_size,
@@ -391,7 +391,7 @@ class BiLSTM_CRF():
                        epochs=self.epochs, validation_split=0.3,
                        callbacks=cb)
 
-    def train2(self, X_train, y_train,  cb):
+    def train2(self, X_train, y_train, cb):
         self.model2.fit(X_train, y_train, batch_size=self.batch_size,
                         epochs=self.epochs, validation_split=0.1,
                         callbacks=cb)
