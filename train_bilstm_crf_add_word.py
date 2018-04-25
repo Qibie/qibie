@@ -9,8 +9,8 @@ import os
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 char_embedding_mat = np.load('data/char_embedding_matrix.npy')
-# word_embedding_mat = np.load('data/word_embedding_matrix.npy')
-word_embedding_mat = np.random.randn(22293, 200)
+word_embedding_mat = np.load('data/word_embedding_matrix.npy')
+# word_embedding_mat = np.random.randn(22293, 200)
 X = np.load('data/train.npy')
 y = np.load('data/y.npy')
 X_word = np.load('data/word.npy')
