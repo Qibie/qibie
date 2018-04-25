@@ -66,8 +66,8 @@ def micro_evaluation(pred_entity, true_entity):
         pred.extend([len(v) for v in et_p.values()])
         true.extend([len(v) for v in et_t.values()])
 
-    precision = sum(t_pos) / sum(pred) + 0.1
-    recall = sum(t_pos) / sum(true) + 0.1
+    precision = sum(t_pos) / sum(pred) + 1.5e-1
+    recall = sum(t_pos) / sum(true) + 1.5e-1
     f1 = 2 / (1 / precision + 1 / recall)
 
     return round(precision, 4), round(recall, 4), round(f1, 4)
