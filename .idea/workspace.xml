@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfeba5ff-90b2-475f-a7dc-9921aad1b4ee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/bilstm_crf_add_word.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict_bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_bilstm_crf_add_word.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_bilstm_crf_add_word.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_bilstm_crf_add_word.py" afterDir="false" />
     </list>
     <ignored path="qibie.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,8 +67,8 @@
       <file leaf-file-name="train_bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train_bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+            <state relative-caret-position="451">
+              <caret line="42" column="13" lean-forward="true" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -84,20 +82,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bilstm_crf_add_word.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2916">
-              <caret line="310" column="77" selection-start-line="310" selection-start-column="67" selection-end-line="310" selection-end-column="77" />
+            <state relative-caret-position="864">
+              <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="predict_bilstm_crf_add_word.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="120" column="72" selection-start-line="120" selection-start-column="72" selection-end-line="120" selection-end-column="72" />
+            <state relative-caret-position="264">
+              <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -1108,24 +1106,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="120" column="72" selection-start-line="120" selection-start-column="72" selection-end-line="120" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train_bilstm_crf_add_word.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+        <state relative-caret-position="451">
+          <caret line="42" column="13" lean-forward="true" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bilstm_crf_add_word.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2916">
-          <caret line="310" column="77" selection-start-line="310" selection-start-column="67" selection-end-line="310" selection-end-column="77" />
+        <state relative-caret-position="864">
+          <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict_bilstm_crf_add_word.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
         </state>
       </provider>
     </entry>
