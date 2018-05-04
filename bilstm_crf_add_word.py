@@ -274,14 +274,16 @@ class BiLSTM_CRF():
         concat = Concatenate(axis=-1)([char_embed_drop, word_conv])
         concat_drop = TimeDistributed(Dropout(self.keep_prob))(concat)
 
-        attention = self.attention_3d_block(concat_drop)
-        attention_drop = TimeDistributed(Dropout(self.keep_prob))(attention)
+        # #attention
+        attention_probs = Dense(int(concat_drop.shape[2]), activation='softmax', name='attention_vec')(
+            concat_drop)
+        attention_mul = merge([concat_drop, attention_probs], name='attention_mul', mode='mul')
 
         bilstm = Bidirectional(LSTM(units=self.n_lstm,
                                     return_sequences=True,
                                     dropout=self.keep_prob_lstm,
                                     recurrent_dropout=self.keep_prob_lstm)
-                               )(attention_drop)
+                               )(attention_mul)
 
         crf = CRF(units=self.n_entity, learn_mode='join',
                   test_mode='viterbi', sparse_target=False)
