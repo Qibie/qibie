@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfeba5ff-90b2-475f-a7dc-9921aad1b4ee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/predict_bilstm_crf.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_bilstm_crf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_bilstm_crf.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_bilstm_crf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Setting/experiment result" beforeDir="false" afterPath="$PROJECT_DIR$/Setting/experiment result" afterDir="false" />
     </list>
     <ignored path="qibie.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,18 +52,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="preprocess.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/preprocess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
-              <folding>
-                <element signature="e#17#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="train_bilstm_crf_add_word.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train_bilstm_crf_add_word.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,8 +64,17 @@
       <file leaf-file-name="Experiment_setting" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Setting/Experiment_setting">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+            <state relative-caret-position="526">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="experiment result" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Setting/experiment result">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -128,7 +124,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="predict_bilstm_crf.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="predict_bilstm_crf.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predict_bilstm_crf.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
@@ -214,6 +210,7 @@
         <option value="$PROJECT_DIR$/bilstm_crf.py" />
         <option value="$PROJECT_DIR$/train_bilstm_crf.py" />
         <option value="$PROJECT_DIR$/predict_bilstm_crf.py" />
+        <option value="$PROJECT_DIR$/Setting/experiment result" />
       </list>
     </option>
   </component>
@@ -866,13 +863,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/HandleLabeledTxt/ProcessLabeledTxt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="108" column="1" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/allwords.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1396346">
@@ -1144,13 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Setting/Experiment_setting">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bilstm_crf_add_word.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1185,6 +1168,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
           <caret line="130" column="28" selection-start-line="130" selection-start-column="28" selection-end-line="130" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Setting/Experiment_setting">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Setting/experiment result">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
