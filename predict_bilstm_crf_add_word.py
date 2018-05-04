@@ -119,9 +119,9 @@ if __name__ == '__main__':
                        optimizer=adam, batch_size=32, epochs=500,
                        n_filter=128, kernel_size=3)
     model_file = 'checkpoints/bilstm_crf_add_word_weights_best_attention_experiment3.hdf5'
-    ner_model.model_attention.load_weights(model_file)
+    ner_model.model2.load_weights(model_file)
 
-    y_pred = ner_model.model_attention.predict([X_test[:, :], test_add[:, :]])
+    y_pred = ner_model.model.predict([X_test[:, :], test_add[:, :]])
     # print(pred.shape) # (4635, 574, 7)
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()

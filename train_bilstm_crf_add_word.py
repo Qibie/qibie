@@ -40,6 +40,6 @@ cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
                   histogram_freq=0),
       ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, mode='min',
                         epsilon=1e-4, cooldown=2, min_lr=1e-8)]
-ner_model.train_attention([X_train, X_word_train], y_train, cb)
+ner_model.train2([X_train, X_word_train], y_train, cb)
 # ner_model.train_char_cnn_word_rnn([X_train, train_add], y_train, cb)
 # print(ner_model.model2.evaluate([X_test,test_add],y_test))
