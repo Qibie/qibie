@@ -196,7 +196,7 @@ class BiLSTM_CRF():
                             outputs=output)
         self.model2.compile(optimizer=self.optimizer,
                             loss=crf.loss_function, metrics=[crf.accuracy])
-        plot_model(self.model2, to_file="model_png/character_model_attention.png", show_shapes=False)
+        # plot_model(self.model2, to_file="model_png/character_model_attention.png", show_shapes=False)
         print(self.model2.summary())
 
 
@@ -292,7 +292,7 @@ class BiLSTM_CRF():
         self.model_attention.compile(optimizer=self.optimizer,
                                      loss=crf.loss_function,
                                      metrics=[crf.accuracy])
-        plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
+        # plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
         print(self.model_attention.summary())
 
     def train_simple(self, X_train, y_train, X_dev, y_dev, cb):
