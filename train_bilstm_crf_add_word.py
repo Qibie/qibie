@@ -30,7 +30,7 @@ ner_model = BiLSTM_CRF(n_input_char=300, char_embedding_mat=char_embedding_mat,
                        keep_prob=0.7, n_lstm=256, keep_prob_lstm=0.6, n_entity=3,
                        optimizer=adam, batch_size=32, epochs=500,
                        n_filter=128, kernel_size=3)
-cp_folder, cp_file = 'checkpoints', 'bilstm_crf_add_word_weights_best_attention.hdf5'
+cp_folder, cp_file = 'checkpoints', 'bilstm_crf_add_word_weights_best_attention_experiment3.hdf5'
 log_filepath = os.getcwd() + '/logs/concat_drop'
 
 cb = [ModelCheckpoint(os.path.join(cp_folder, cp_file), monitor='val_loss',
