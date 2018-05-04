@@ -125,10 +125,10 @@ if __name__ == '__main__':
                            n_entity=3, optimizer='adam', batch_size=16, epochs=500)
     """加载model"""
 
-    model_file = 'checkpoints/bilstm_crf_weights_best_attention.hdf5'
-    ner_model.model_attention.load_weights(model_file)
+    model_file = 'checkpoints/bilstm_crf_weights_best_attention_experiment1.hdf5'
+    ner_model.model.load_weights(model_file)
 
-    y_pred = ner_model.model_attention.predict(X_test[:, :])
+    y_pred = ner_model.model.predict(X_test[:, :])
 
     char2vec, n_char, n_embed, char2index = p.get_char2object()
     index2char = {i: w for w, i in char2index.items()}
