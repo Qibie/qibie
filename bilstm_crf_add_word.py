@@ -9,7 +9,7 @@ from keras.layers.core import *
 from keras.layers.recurrent import LSTM
 from keras.models import *
 from keras.layers import merge
-
+from keras.utils.vis_utils import plot_model
 
 class BiLSTM_CRF():
     """
@@ -42,7 +42,7 @@ class BiLSTM_CRF():
 
         # self.build_simple()
         # self.build()
-        self.build2()
+        self.build_attention()
         # self.build_attention()
 
     def attention_3d_block(self, inputs):
@@ -196,8 +196,9 @@ class BiLSTM_CRF():
                             outputs=output)
         self.model2.compile(optimizer=self.optimizer,
                             loss=crf.loss_function, metrics=[crf.accuracy])
-
+        plot_model(self.model2, to_file="model_png/character_model_attention.png", show_shapes=False)
         print(self.model2.summary())
+
 
     def build_char_cnn_word_rnn(self):
         # main
@@ -240,6 +241,7 @@ class BiLSTM_CRF():
         self.model_char_cnn_word_rnn.compile(optimizer=self.optimizer,
                                              loss=crf.loss_function,
                                              metrics=[crf.accuracy])
+        plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
         print(self.model_char_cnn_word_rnn.summary())
 
     def build_attention(self):
@@ -290,6 +292,8 @@ class BiLSTM_CRF():
         self.model_attention.compile(optimizer=self.optimizer,
                                      loss=crf.loss_function,
                                      metrics=[crf.accuracy])
+        plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
+        print(self.model_attention.summary())
 
     def train_simple(self, X_train, y_train, X_dev, y_dev, cb):
         self.model_simple.fit(X_train, y_train, batch_size=self.batch_size,

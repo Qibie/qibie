@@ -90,19 +90,33 @@ OUTPUT_DIR = '/home/curry/NER/patent/labeled_complete'
 #         print(line)
 #         i=i+1
 
+#
+# import numpy as np
+# X_train=np.load("../data/train.npy")
+# train_char=np.load('../data/tt.npy')
+# tag=np.load("../data/tag.npy")
+# y=np.load("../data/y.npy")
+#
+#
+# i=0
+# while(i<len(train_char)):
+#     # print(X_train[i])
+#     print(train_char[i])
+#     print(tag[i])
+#     # print(y[i])
+#     print("#########################")
+#     i=i+1
+#
+#
+import os
 
-import numpy as np
-X_train=np.load("../data/train.npy")
-train_char=np.load('../data/tt.npy')
-tag=np.load("../data/tag.npy")
-y=np.load("../data/y.npy")
-
+DIR_NAME='/home/curry/NER/patent/character_segmentation_column'
 
 i=0
-while(i<len(train_char)):
-    # print(X_train[i])
-    print(train_char[i])
-    print(tag[i])
-    # print(y[i])
-    print("#########################")
-    i=i+1
+for file in os.listdir(DIR_NAME):
+    index=file.rfind('.')
+    if(os.path.isfile(os.path.join(DIR_NAME,file)) and file[index:]=='.txt'):
+        with open(os.path.join(DIR_NAME,file),'r') as finput:
+            for line in finput.readlines():
+                i=i+1
+print(i)

@@ -23,7 +23,7 @@ class BiLSTM_CRF():
         self.optimizer = optimizer
         self.batch_size = batch_size
         self.epochs = epochs
-        self.build_attention()
+        self.build()
 
 
     def build(self):
