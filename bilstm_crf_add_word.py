@@ -42,7 +42,7 @@ class BiLSTM_CRF():
 
         # self.build_simple()
         # self.build()
-        self.build2()
+        self.build_char_cnn_word_rnn()
         # self.build_attention()
 
     def attention_3d_block(self, inputs):
@@ -225,7 +225,7 @@ class BiLSTM_CRF():
                                mask_zero=True,
                                trainable=True)(word_input)
         word_embed_drop = Dropout(self.keep_prob)(word_embed)
-        bilstm = Bidirectional(GRU(self.n_lstm, return_sequences=True,
+        bilstm = Bidirectional(LSTM(self.n_lstm, return_sequences=True,
                                    dropout=self.keep_prob_lstm,
                                    recurrent_dropout=self.keep_prob_lstm)
                                )(word_embed_drop)
@@ -241,7 +241,7 @@ class BiLSTM_CRF():
         self.model_char_cnn_word_rnn.compile(optimizer=self.optimizer,
                                              loss=crf.loss_function,
                                              metrics=[crf.accuracy])
-        plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
+        #plot_model(self.model_attention, to_file="model_png/character_model_attention.png", show_shapes=False)
         print(self.model_char_cnn_word_rnn.summary())
 
     def build_attention(self):
@@ -320,5 +320,5 @@ class BiLSTM_CRF():
 
     def train_char_cnn_word_rnn(self, X_train, y_train, cb):
         self.model_char_cnn_word_rnn.fit(X_train, y_train, batch_size=self.batch_size,
-                                         epochs=self.epochs, validation_split=0.2,
+                                         epochs=self.epochs, validation_split=0.1,
                                          callbacks=cb)

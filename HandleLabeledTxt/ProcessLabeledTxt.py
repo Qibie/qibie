@@ -108,15 +108,15 @@ OUTPUT_DIR = '/home/curry/NER/patent/labeled_complete'
 #     i=i+1
 #
 #
-import os
-
-DIR_NAME='/home/curry/NER/patent/character_segmentation_column'
-
-i=0
-for file in os.listdir(DIR_NAME):
-    index=file.rfind('.')
-    if(os.path.isfile(os.path.join(DIR_NAME,file)) and file[index:]=='.txt'):
-        with open(os.path.join(DIR_NAME,file),'r') as finput:
-            for line in finput.readlines():
-                i=i+1
-print(i)
+# import os
+#
+# DIR_NAME='/home/curry/NER/patent/character_segmentation_column'
+#
+# i=0
+# for file in os.listdir(DIR_NAME):
+#     index=file.rfind('.')
+#     if(os.path.isfile(os.path.join(DIR_NAME,file)) and file[index:]=='.txt'):
+#         with open(os.path.join(DIR_NAME,file),'r') as finput:
+#             for line in finput.readlines():
+#                 i=i+1
+# print(i)
